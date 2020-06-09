@@ -3,6 +3,7 @@ import {isEmpty, isEqual} from "lodash";
 import {connect} from "react-redux";
 // @ts-ignore
 import { drawTree } from '../module/facetTree';
+import {fetchAssembleData, updateAssembleShown} from "../redux/actions";
 
 class TreeCanvas extends React.Component<any, any> {
     render() {
@@ -16,7 +17,10 @@ class TreeCanvas extends React.Component<any, any> {
         if (isEmpty(this.props.treeData)) return;
         const tree = document.getElementById('tree');
         emptyChildren(tree);
-        drawTree(tree, this.props.treeData, (d:any) => {console.log(d)});
+        drawTree(tree, this.props.treeData, (d:any) => {
+            this.props.fetchAssembleData(d);
+            this.props.updateAssembleShown();
+        });
     }
 
 }
@@ -35,4 +39,4 @@ const mapStateToProps = (state: any) => {
     return { treeData };
 };
 
-export default connect(mapStateToProps, null)(TreeCanvas);
+export default connect(mapStateToProps, {fetchAssembleData, updateAssembleShown})(TreeCanvas);

@@ -1,9 +1,17 @@
-import {Update_Shown, Update_TopicName, Update_TreeData} from "../actionTypes";
+import {
+    Update_AssembleData,
+    Update_AssembleShown,
+    Update_Shown,
+    Update_TopicName,
+    Update_TreeData
+} from "../actionTypes";
 
 const initialState = {
     topicName: '',
     shown: false,
-    treeData: {}
+    treeData: {},
+    assembleShown: false,
+    assembleData: [],
 }
 
 export default function (state = initialState, action: any) {
@@ -25,6 +33,27 @@ export default function (state = initialState, action: any) {
                 ...state,
                 shown: !state.shown,
             }
+        }
+        case Update_AssembleData: {
+            return {
+                ...state,
+                assembleData: action.payload.assembleData,
+            }
+        }
+        case Update_AssembleShown: {
+            if (state.assembleShown) {
+                return {
+                    ...state,
+                    assembleShown: !state.assembleShown,
+                    assembleData: [],
+                }
+            } else {
+                return {
+                    ...state,
+                    assembleShown: !state.assembleShown,
+                }
+            }
+
         }
         default:
             return state;

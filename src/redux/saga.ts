@@ -1,8 +1,16 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {MapData_Fetch_Required, TreeData_Fetch_Required, Update_MapData, Update_TreeData} from './actionTypes';
+import {
+    AssembleData_Fetch_Required,
+    MapData_Fetch_Required,
+    TreeData_Fetch_Required,
+    Update_AssembleData,
+    Update_MapData,
+    Update_TreeData
+} from './actionTypes';
 import { dependenceAPI } from '../services/dependence';
 import { ActionPayload } from './actions';
 import {topicAPI} from "../services/topic";
+import {assembleAPI} from "../services/leaf";
 
 function* fetchMapData(action: ActionPayload<{ domainName: string }>) {
     try {
@@ -28,9 +36,22 @@ function* fetchTreeData(action: ActionPayload<{ topicName: string }>) {
     }
 }
 
+function* fetchAssembleData(action: ActionPayload<{ facetId: number }>) {
+    try {
+        const assembleData = yield call(
+            assembleAPI.getAssemblesByFacetId,
+            action.payload.facetId
+        );
+        yield put({ type: Update_AssembleData, payload: {assembleData}});
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 function* mySaga() {
     yield takeEvery(MapData_Fetch_Required, fetchMapData);
     yield takeEvery(TreeData_Fetch_Required, fetchTreeData);
+    yield takeEvery(AssembleData_Fetch_Required, fetchAssembleData);
 }
 
 export default mySaga;
