@@ -14,7 +14,7 @@ export interface MapData {
     communityRelation: { [p: string]: number[] };
 }
 
-const initialState: { mapData: MapData } = {
+const initialState: { mapData: MapData; comId: number } = {
     mapData: {
         topics: {},
         resultRelations: {},
@@ -23,17 +23,23 @@ const initialState: { mapData: MapData } = {
         relationCrossCommunity: [],
         communityRelation: {},
     },
+    comId: -1,
 };
 
 export default function (
     state = initialState,
-    action: ActionPayload<{ mapData: MapData }>,
+    action: ActionPayload<{ mapData: MapData } | { comId: number}>,
 ) {
     switch (action.type) {
         case Click_Community: {
+            const { comId } = action.payload as { comId: number };
+            return {
+                ...state,
+                comId,
+            }
         }
         case Update_MapData: {
-            const { mapData } = action.payload;
+            const { mapData } = action.payload as { mapData: MapData };
             return {
                 ...state,
                 mapData,
