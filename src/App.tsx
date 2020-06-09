@@ -1,11 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import TestButton from "./components/TestButton";
+import Home from "./containers/Home";
 
 function App() {
   return (
-    <TestButton />
+    <Home />
   );
 }
 
