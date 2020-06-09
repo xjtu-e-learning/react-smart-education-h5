@@ -28,3 +28,4 @@ yarn-error.log*
 
 # module
 src/module/topicDependenceVisualization.js
+src/module/facetTree.js

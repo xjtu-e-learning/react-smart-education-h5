@@ -1,4 +1,10 @@
-import {Click_Community, MapData_Fetch_Required} from './actionTypes';
+import {
+    Click_Community,
+    MapData_Fetch_Required,
+    TreeData_Fetch_Required, Update_Shown,
+    Update_TopicName,
+    Update_TreeData
+} from './actionTypes';
 import { Action } from 'redux';
 
 export interface ActionPayload<T> extends Action<string> {
@@ -18,3 +24,28 @@ export const clickCom = (comId: number) => ({
         comId,
     },
 });
+
+export const clickTopicName = (topicName: string) => ({
+    type: Update_TopicName,
+    payload: {
+        topicName,
+    }
+});
+
+export const updateTreeData = (treeData: any) => ({
+    type: Update_TreeData,
+    payload: {
+        treeData,
+    }
+});
+
+export const fetchTreeData = (topicName: string) => ({
+    type: TreeData_Fetch_Required,
+    payload: {
+        topicName,
+    }
+});
+
+export const updateShown = () => ({
+    type: Update_Shown,
+})

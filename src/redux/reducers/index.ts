@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
 import community from './community';
-
-export default combineReducers({ community });
+import tree from './tree';
+export default combineReducers({ community, tree });

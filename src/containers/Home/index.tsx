@@ -5,9 +5,10 @@ import { gaozhongshuxue } from '../../module/topicDependenceVisualization';
 import {drawCommunity, drawTopic} from '../../module/topicDependenceVisualization';
 import {connect} from "react-redux";
 import { isEqual } from 'lodash';
-import {clickCom} from "../../redux/actions";
+import {clickCom, clickTopicName, fetchTreeData, updateShown} from "../../redux/actions";
 
 class Home extends React.Component<any, any> {
+
     render() {
         return (
             <div style={{ position: "relative", top: "50%", marginTop: "-50vw" }}>
@@ -30,7 +31,11 @@ class Home extends React.Component<any, any> {
         } else {
             const svg = document.getElementById('map');
             emptyChildren(svg);
-            drawTopic(comId, gaozhongshuxue, svg as HTMLElement, () => {});
+            drawTopic(comId, gaozhongshuxue, svg as HTMLElement, (d:any) => {
+                this.props.clickTopicName(gaozhongshuxue.topics[d]);
+                this.props.fetchTreeData(gaozhongshuxue.topics[d]);
+                this.props.updateShown();
+            });
         }
         return false;
     }
@@ -57,4 +62,4 @@ const mapStateToProps = (state: any) => {
     return { mapData, comId };
 };
 
-export default connect(mapStateToProps, {clickCom})(Home);
+export default connect(mapStateToProps, {clickCom, clickTopicName, fetchTreeData, updateShown})(Home);
