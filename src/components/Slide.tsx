@@ -10,7 +10,9 @@ interface IProps {
 
 class Slide extends React.Component<IProps, any> {
     render() {
+        // this.props.children 代表组件的所有子节点
         const {shown, children, direction, offset} = this.props;
+        console.log("props in slides",this.props)
         let StyledDiv;
         if (direction === 'right') {
             StyledDiv = styled.div`
@@ -40,7 +42,7 @@ class Slide extends React.Component<IProps, any> {
 
         return (
             <StyledDiv>
-                <button style={{ position: 'absolute', top: 0, right: 0}} onClick={() => this.props.closeFunc()}>
+                <button style={{ position: 'static', top: 0, right: 0}} onClick={() => this.props.closeFunc()}>
                     {"x"}
                 </button>
                 {children}

@@ -1,5 +1,7 @@
-import { Click_Community, Update_MapData } from '../actionTypes';
+//import { MapData } from './community';
+import { Click_Community, Update_MapData} from '../actionTypes';
 import { ActionPayload } from '../actions';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 export interface MapData {
     topics: { [p: string]: string };
@@ -24,6 +26,7 @@ const initialState: { mapData: MapData; comId: number } = {
         communityRelation: {},
     },
     comId: -1,
+
 };
 
 export default function (
@@ -45,6 +48,7 @@ export default function (
                 mapData,
             };
         }
+        
         default:
             return state;
     }

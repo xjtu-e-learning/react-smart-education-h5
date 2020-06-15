@@ -3,7 +3,8 @@ import {
     Update_AssembleShown,
     Update_Shown,
     Update_TopicName,
-    Update_TreeData
+    Update_TreeData,
+    Update_DomainData
 } from "../actionTypes";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
     treeData: {},
     assembleShown: false,
     assembleData: [],
+    domainData:[]
 }
 
 export default function (state = initialState, action: any) {
@@ -26,6 +28,12 @@ export default function (state = initialState, action: any) {
             return {
                 ...state,
                 treeData: action.payload.treeData,
+            }
+        }
+        case Update_DomainData: {
+            return {
+                ...state,
+                domainData: action.payload.domainData,
             }
         }
         case Update_Shown: {

@@ -7,7 +7,7 @@ import {fetchAssembleData, updateAssembleShown} from "../redux/actions";
 
 class TreeCanvas extends React.Component<any, any> {
     render() {
-        console.log(this.props.treeData);
+        console.log("Tree Canvas this.props.treeData",this.props.treeData);
         return (
             <svg id={"tree"} width={"100vw"} height={"120vw"} style={{position: "relative", top: "50%", marginTop: "-50vw"}}>
             </svg>
