@@ -4,7 +4,6 @@ import {
     Update_Shown,
     Update_TopicName,
     Update_TreeData,
-    Update_DomainData
 } from "../actionTypes";
 
 const initialState = {
@@ -28,12 +27,6 @@ export default function (state = initialState, action: any) {
             return {
                 ...state,
                 treeData: action.payload.treeData,
-            }
-        }
-        case Update_DomainData: {
-            return {
-                ...state,
-                domainData: action.payload.domainData,
             }
         }
         case Update_Shown: {
