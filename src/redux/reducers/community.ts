@@ -1,4 +1,4 @@
-import { Click_Community, Update_MapData } from '../actionTypes';
+import { Click_Community, Update_MapData, Update_Sequences } from '../actionTypes';
 import { ActionPayload } from '../actions';
 
 export interface MapData {
@@ -14,7 +14,7 @@ export interface MapData {
     communityRelation: { [p: string]: number[] };
 }
 
-const initialState: { mapData: MapData; comId: number } = {
+const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: number[], sequences: {[p:string]: number[]} } = {
     mapData: {
         topics: {},
         resultRelations: {},
@@ -24,18 +24,29 @@ const initialState: { mapData: MapData; comId: number } = {
         communityRelation: {},
     },
     comId: -1,
+    inCom: [],
+    outCom: [],
+    sequences: {}
 };
 
 export default function (
     state = initialState,
-    action: ActionPayload<{ mapData: MapData } | { comId: number}>,
+    action: ActionPayload<{ mapData: MapData } | { comId: number} | { sequences: {[p:string]: number[]} }>,
 ) {
     switch (action.type) {
         case Click_Community: {
             const { comId } = action.payload as { comId: number };
+            const tmp = [];
+            for (let key in state.mapData.communityRelation) {
+                if (state.mapData.communityRelation[key].indexOf(comId) !== -1) {
+                    tmp.push(parseInt(key));
+                }
+            }
             return {
                 ...state,
                 comId,
+                inCom: tmp,
+                outCom: state.mapData.communityRelation[comId] === undefined ? [] : state.mapData.communityRelation[comId],
             }
         }
         case Update_MapData: {
@@ -43,6 +54,13 @@ export default function (
             return {
                 ...state,
                 mapData,
+            };
+        }
+        case Update_Sequences: {
+            const { sequences } = action.payload as { sequences: {[p:string]: number[]}};
+            return {
+                ...state,
+                sequences,
             };
         }
         default:

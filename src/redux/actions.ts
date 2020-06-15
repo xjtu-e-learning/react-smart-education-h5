@@ -4,13 +4,23 @@ import {
     MapData_Fetch_Required,
     TreeData_Fetch_Required, Update_AssembleShown, Update_Shown,
     Update_TopicName,
-    Update_TreeData
+    Update_TreeData,
+    Update_MapData,
+    Update_Sequences,
 } from './actionTypes';
 import { Action } from 'redux';
+import { MapData } from './reducers/community';
 
 export interface ActionPayload<T> extends Action<string> {
     payload: T;
 }
+
+export const updateMapData = (mapData: MapData) => ({
+    type: Update_MapData,
+    payload: {
+        mapData,
+    },
+});
 
 export const fetchMapData = (domainName: string) => ({
     type: MapData_Fetch_Required,
@@ -19,12 +29,14 @@ export const fetchMapData = (domainName: string) => ({
     },
 });
 
-export const clickCom = (comId: number) => ({
-    type: Click_Community,
-    payload: {
-        comId,
-    },
-});
+export const clickCom = (comId: number) => {
+    return {
+        type: Click_Community,
+        payload: {
+            comId,
+        },
+    }
+};
 
 export const clickTopicName = (topicName: string) => ({
     type: Update_TopicName,
@@ -61,3 +73,10 @@ export const fetchAssembleData = (facetId: number) => ({
         facetId,
     },
 });
+
+export const updateSequences = (sequences: {[p:string]: number[]}) => ({
+    type: Update_Sequences,
+    payload: {
+        sequences,
+    }
+})

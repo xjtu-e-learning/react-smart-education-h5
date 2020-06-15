@@ -11,3 +11,5 @@ export const Update_Shown: string = 'Update_Shown';
 export const Update_AssembleShown: string = 'Update_AssembleShown';
 export const AssembleData_Fetch_Required: string = 'AssembleData_Fetch_Required';
 export const Update_AssembleData: string = 'Update_AssembleData';
+
+export const Update_Sequences: string = 'Update_Squences';
