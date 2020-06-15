@@ -1,4 +1,3 @@
-import { MapData } from './reducers/community';
 import {
     AssembleData_Fetch_Required,
     Click_Community,
@@ -6,16 +5,22 @@ import {
     TreeData_Fetch_Required, Update_AssembleShown, Update_Shown,
     Update_TopicName,
     Update_TreeData,
-    Incom_Fetch_Required,
-    //SubjectData_Fetch_Required,
-    DomainData_Fetch_Required,
-    Update_DomainData,
+    Update_MapData,
+    Update_Sequences,
 } from './actionTypes';
 import { Action } from 'redux';
+import { MapData } from './reducers/community';
 
 export interface ActionPayload<T> extends Action<string> {
     payload: T;
 }
+
+export const updateMapData = (mapData: MapData) => ({
+    type: Update_MapData,
+    payload: {
+        mapData,
+    },
+});
 
 export const fetchMapData = (domainName: string) => ({
     type: MapData_Fetch_Required,
@@ -24,12 +29,14 @@ export const fetchMapData = (domainName: string) => ({
     },
 });
 
-export const clickCom = (comId: number) => ({
-    type: Click_Community,
-    payload: {
-        comId,
-    },
-});
+export const clickCom = (comId: number) => {
+    return {
+        type: Click_Community,
+        payload: {
+            comId,
+        },
+    }
+};
 
 export const clickTopicName = (topicName: string) => ({
     type: Update_TopicName,
@@ -67,31 +74,9 @@ export const fetchAssembleData = (facetId: number) => ({
     },
 });
 
-export const fetchIncomData = (mapData:MapData,comId:number)=>({
-    type: Incom_Fetch_Required,
-    payload:{
-        mapData,
-        comId,
-    }
-});
-
-//export const fetchSubjectData = (mapData:MapData,comId:number)=>({
-  //  type: SubjectData_Fetch_Required,
-  //  payload:{
-        
-  //  }
-//});
-
-export const fetchDomainData = (subjectName:string)=>({
-    type:DomainData_Fetch_Required,
-    payload:{
-        subjectName
+export const updateSequences = (sequences: {[p:string]: number[]}) => ({
+    type: Update_Sequences,
+    payload: {
+        sequences,
     }
 })
-
-export const updateDomainData = (domainData: any) => ({
-    type: Update_DomainData,
-    payload: {
-        domainData
-    }
-});
