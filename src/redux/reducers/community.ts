@@ -1,4 +1,4 @@
-import { Click_Community, Update_MapData, Update_Sequences } from '../actionTypes';
+import { Click_Community, Update_MapData, Update_Sequences, Update_Topic } from '../actionTypes';
 import { ActionPayload } from '../actions';
 
 export interface MapData {
@@ -14,7 +14,7 @@ export interface MapData {
     communityRelation: { [p: string]: number[] };
 }
 
-const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: number[], sequences: {[p:string]: number[]} } = {
+const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: number[], sequences: {[p:string]: number[]}, topicId:number,inTopic:number[],outTopic:number[] } = {
     mapData: {
         topics: {},
         resultRelations: {},
@@ -26,18 +26,22 @@ const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: 
     comId: -1,
     inCom: [],
     outCom: [],
-    sequences: {}
+    sequences: {},
+    topicId:-1,
+    inTopic:[],
+    outTopic:[]
 };
 
 export default function (
     state = initialState,
-    action: ActionPayload<{ mapData: MapData } | { comId: number} | { sequences: {[p:string]: number[]} }>,
+    action: ActionPayload<{ mapData: MapData } | { comId: number} | { sequences: {[p:string]: number[]} }|{topicId:number}>,
 ) {
     switch (action.type) {
         case Click_Community: {
             const { comId } = action.payload as { comId: number };
             const tmp = [];
             for (let key in state.mapData.communityRelation) {
+               
                 if (state.mapData.communityRelation[key].indexOf(comId) !== -1) {
                     tmp.push(parseInt(key));
                 }
@@ -47,6 +51,23 @@ export default function (
                 comId,
                 inCom: tmp,
                 outCom: state.mapData.communityRelation[comId] === undefined ? [] : state.mapData.communityRelation[comId],
+            }
+        }
+        case Update_Topic:{
+            const  {topicId}  = action.payload as { topicId: number };
+            
+            const tmp = [];
+           
+            for (let key in state.mapData.resultRelations) {
+                if (state.mapData.resultRelations[key].indexOf(topicId) !== -1) {
+                    tmp.push(parseInt(key));
+                }
+            }
+            return {
+                ...state,
+                topicId,
+                inTopic: tmp,
+                outTopic:state.mapData.resultRelations[topicId] === undefined ? [] : state.mapData.resultRelations[topicId],
             }
         }
         case Update_MapData: {

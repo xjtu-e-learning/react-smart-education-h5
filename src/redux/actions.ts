@@ -3,6 +3,7 @@ import {
     Click_Community,
     MapData_Fetch_Required,
     TreeData_Fetch_Required, Update_AssembleShown, Update_Shown,
+    Update_Topic,
     Update_TopicName,
     Update_TreeData,
     Update_MapData,
@@ -37,6 +38,13 @@ export const clickCom = (comId: number) => {
         },
     }
 };
+
+export const clickTopic = (topicId: number) => ({
+    type: Update_Topic,
+    payload: {
+        topicId,
+    }
+});
 
 export const clickTopicName = (topicName: string) => ({
     type: Update_TopicName,

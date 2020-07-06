@@ -5,7 +5,7 @@ import { gaozhongshuxue } from '../module/topicDependenceVisualization';
 import { drawCommunity, drawTopic } from '../module/topicDependenceVisualization';
 import { connect } from "react-redux";
 import { isEqual } from 'lodash';
-import { clickCom, clickTopicName, fetchTreeData, updateShown, updateMapData, updateSequences } from "../redux/actions";
+import { clickCom, clickTopic,clickTopicName, fetchTreeData, updateShown, updateMapData, updateSequences } from "../redux/actions";
 
 class MapCanvas extends React.Component<any, any> {
     render() {
@@ -31,6 +31,7 @@ class MapCanvas extends React.Component<any, any> {
             const svg = document.getElementById('map');
             emptyChildren(svg);
             drawTopic(comId, gaozhongshuxue, svg as HTMLElement, (d: any) => {
+                this.props.clickTopic(d);
                 this.props.clickTopicName(gaozhongshuxue.topics[d]);
                 this.props.fetchTreeData(gaozhongshuxue.topics[d]);
                 this.props.updateShown();
@@ -60,7 +61,8 @@ function emptyChildren(dom: HTMLElement | null): void {
 const mapStateToProps = (state: any) => {
     const { community } = state;
     const { mapData, comId } = community;
-    return { mapData, comId };
+   
+    return { mapData, comId};
 };
 
-export default connect(mapStateToProps, { clickCom, clickTopicName, fetchTreeData, updateShown, updateMapData, updateSequences })(MapCanvas);
+export default connect(mapStateToProps, { clickCom,clickTopic, clickTopicName, fetchTreeData, updateShown, updateMapData, updateSequences })(MapCanvas);

@@ -1,17 +1,12 @@
-import React, { PureComponent } from 'react';
-import { Divider } from 'antd';
-import { Card, Button, Col, Row } from 'antd';
-import PropTypes from 'prop-types';
+import React from 'react';
+
+
 //import styles from './assemble.css';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { Badge } from 'antd';
-import { Pagination } from 'antd';
+
 // @ts-ignore
- import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
-//import LinesEllipsis from 'react-lines-ellipsis'
-import Ellipsis from 'ant-design-pro/lib/Ellipsis';
-import Paragraph from 'antd/lib/skeleton/Paragraph';
+import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import Grid from '@material-ui/core/Grid/Grid';
 import Paper from '@material-ui/core/Paper/Paper';
 

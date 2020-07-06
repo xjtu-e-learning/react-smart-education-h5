@@ -12,7 +12,7 @@ class Slide extends React.Component<IProps, any> {
     render() {
         // this.props.children 代表组件的所有子节点
         const {shown, children, direction, offset} = this.props;
-        console.log("props in slides",this.props)
+        //console.log("props in slides",this.props)
         let StyledDiv;
         if (direction === 'right') {
             StyledDiv = styled.div`
