@@ -14,3 +14,8 @@ export const AssembleData_Fetch_Required: string = 'AssembleData_Fetch_Required'
 export const Update_AssembleData: string = 'Update_AssembleData';
 
 export const Update_Sequences: string = 'Update_Squences';
+
+export const  Update_SubjectData: string = 'Update_SubjectData';
+export const SubjectData_Fetch_Required: string = 'SubjectData_Fetch_Required';
+export const  Update_DomainData: string = 'Update_DomainData';
+export const DomainData_Fetch_Required: string = 'DomainData_Fetch_Required';

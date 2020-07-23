@@ -5,10 +5,13 @@ import {
     AssembleData_Fetch_Required,
     MapData_Fetch_Required,
     TreeData_Fetch_Required,
+    SubjectData_Fetch_Required,
+    DomainData_Fetch_Required,
     Update_AssembleData,
     Update_MapData,
     Update_TreeData,
-    
+    Update_SubjectData,
+    Update_DomainData,
   
 } from './actionTypes';
 import { dependenceAPI } from '../services/dependence';
@@ -16,6 +19,29 @@ import { ActionPayload } from './actions';
 import {topicAPI} from "../services/topic";
 import {assembleAPI} from "../services/leaf";
 import {subjectAPI} from '../services/subject';
+
+function* fetchSubjectData() {
+    try {
+        const subjectData = yield call(
+            subjectAPI.getSubjects,
+        );
+        yield put({ type: Update_SubjectData, payload: { subjectData } });
+    } catch (e) {
+        yield put({ type: Update_SubjectData, payload: {subjectData: e} });
+    }
+}
+
+function* fetchDomainData(action: ActionPayload<{ subjectName: string }>) {
+    try {
+        const domainData = yield call(
+            subjectAPI.getDomains,
+            action.payload.subjectName,
+        );
+        yield put({ type: Update_DomainData, payload: { domainData } });
+    } catch (e) {
+        yield put({ type: Update_DomainData, payload: {domainData: e} });
+    }
+}
 
 
 
@@ -60,6 +86,8 @@ function* mySaga() {
     yield takeEvery(MapData_Fetch_Required, fetchMapData);
     yield takeEvery(TreeData_Fetch_Required, fetchTreeData);
     yield takeEvery(AssembleData_Fetch_Required, fetchAssembleData);
+    yield takeEvery(SubjectData_Fetch_Required, fetchSubjectData);
+    yield takeEvery(DomainData_Fetch_Required, fetchDomainData);
 }
 
 export default mySaga;

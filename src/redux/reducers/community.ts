@@ -1,4 +1,4 @@
-import { Click_Community, Update_MapData, Update_Sequences, Update_Topic } from '../actionTypes';
+import { Click_Community, Update_MapData, Update_Sequences, Update_Topic,Update_SubjectData,Update_DomainData, SubjectData_Fetch_Required } from '../actionTypes';
 import { ActionPayload } from '../actions';
 
 export interface MapData {
@@ -14,7 +14,7 @@ export interface MapData {
     communityRelation: { [p: string]: number[] };
 }
 
-const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: number[], sequences: {[p:string]: number[]}, topicId:number,inTopic:number[],outTopic:number[] } = {
+const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: number[], sequences: {[p:string]: number[]}, topicId:number,inTopic:number[],outTopic:number[],subjectData:[], domainData:[]} = {
     mapData: {
         topics: {},
         resultRelations: {},
@@ -23,18 +23,21 @@ const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: 
         relationCrossCommunity: [],
         communityRelation: {},
     },
+
     comId: -1,
     inCom: [],
     outCom: [],
     sequences: {},
     topicId:-1,
     inTopic:[],
-    outTopic:[]
+    outTopic:[],
+    subjectData:[],
+    domainData:[]
 };
 
 export default function (
     state = initialState,
-    action: ActionPayload<{ mapData: MapData } | { comId: number} | { sequences: {[p:string]: number[]} }|{topicId:number}>,
+    action: ActionPayload<{ mapData: MapData } | { comId: number} | { sequences: {[p:string]: number[]} }| { topicId:number } | { subjectName:string } | { domainName:string } | { subjectData:[] } | { domainData:[] }>,
 ) {
     switch (action.type) {
         case Click_Community: {
@@ -84,7 +87,23 @@ export default function (
                 sequences,
             };
         }
+        case Update_SubjectData: {
+
+            const { subjectData } = action.payload as {subjectData: [] };
+            return {
+                ...state,
+                subjectData,
+            };
+        }
+        case Update_DomainData: {
+            const { domainData } = action.payload as {domainData: [] };
+            return {
+                ...state,
+                domainData,
+                };
+            }
+        
         default:
-            return state;
+            return state; 
     }
 }

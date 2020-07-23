@@ -42,9 +42,7 @@ class Slide extends React.Component<IProps, any> {
 
         return (
             <StyledDiv>
-                <button style={{ position: 'static', top: 0, right: 0}} onClick={() => this.props.closeFunc()}>
-                    {"x"}
-                </button>
+                
                 {children}
             </StyledDiv>
         );

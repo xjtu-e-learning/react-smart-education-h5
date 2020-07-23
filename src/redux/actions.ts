@@ -2,17 +2,22 @@ import {
     AssembleData_Fetch_Required,
     Click_Community,
     MapData_Fetch_Required,
-    TreeData_Fetch_Required, Update_AssembleShown, Update_Shown,
+    TreeData_Fetch_Required, SubjectData_Fetch_Required,
+    DomainData_Fetch_Required,Update_AssembleShown, Update_Shown,
     Update_Topic,
     Update_TopicName,
     Update_TreeData,
     Update_MapData,
     Update_Sequences,
+    Update_SubjectData,
+    Update_DomainData
 } from './actionTypes';
+
 import { Action } from 'redux';
 import { MapData } from './reducers/community';
 
 export interface ActionPayload<T> extends Action<string> {
+    type: any;
     payload: T;
 }
 
@@ -87,4 +92,29 @@ export const updateSequences = (sequences: {[p:string]: number[]}) => ({
     payload: {
         sequences,
     }
-})
+});
+
+export const updateSubjectData = (subjectData:any) => ({
+    type: Update_SubjectData,
+    payload: {
+        subjectData,
+    },
+});
+
+export const updateDomainData = (domainData:any) => ({
+    type: Update_DomainData,
+    payload: {
+         domainData,
+    },
+});
+
+export const fetchSubjectData = () => ({
+    type: SubjectData_Fetch_Required,
+});
+
+export const fetchDomainData = (subjectName: string) => ({
+    type: DomainData_Fetch_Required,
+    payload: {
+        subjectName,
+    },
+});
