@@ -10,9 +10,11 @@ import {
     Update_MapData,
     Update_Sequences,
     Update_SubjectData,
-    Update_DomainData
+    Update_DomainData,
+    Update_MapShown,
+    Update_DomainShown
 } from './actionTypes';
-
+//@ts-ignore
 import { Action } from 'redux';
 import { MapData } from './reducers/community';
 
@@ -117,4 +119,11 @@ export const fetchDomainData = (subjectName: string) => ({
     payload: {
         subjectName,
     },
+});
+
+export const updateMapShown = () => ({
+    type: Update_MapShown,
+});
+export const updateDomainShown = () => ({
+    type: Update_DomainShown,
 });

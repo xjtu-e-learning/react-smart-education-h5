@@ -41,8 +41,7 @@ class Slide extends React.Component<IProps, any> {
         }
 
         return (
-            <StyledDiv>
-                
+            <StyledDiv>             
                 {children}
             </StyledDiv>
         );

@@ -1,4 +1,4 @@
-import { Click_Community, Update_MapData, Update_Sequences, Update_Topic,Update_SubjectData,Update_DomainData, SubjectData_Fetch_Required } from '../actionTypes';
+import { Click_Community, Update_MapData, Update_Sequences, Update_Topic,Update_SubjectData,Update_DomainData, SubjectData_Fetch_Required,Update_MapShown,Update_DomainShown } from '../actionTypes';
 import { ActionPayload } from '../actions';
 
 export interface MapData {
@@ -14,7 +14,7 @@ export interface MapData {
     communityRelation: { [p: string]: number[] };
 }
 
-const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: number[], sequences: {[p:string]: number[]}, topicId:number,inTopic:number[],outTopic:number[],subjectData:[], domainData:[]} = {
+const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: number[], sequences: {[p:string]: number[]}, topicId:number,inTopic:number[],outTopic:number[],subjectData:[], domainData:[],mapShown: false,domainShown:false} = {
     mapData: {
         topics: {},
         resultRelations: {},
@@ -22,6 +22,7 @@ const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: 
         topicId2Community: {},
         relationCrossCommunity: [],
         communityRelation: {},
+        
     },
 
     comId: -1,
@@ -32,7 +33,9 @@ const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: 
     inTopic:[],
     outTopic:[],
     subjectData:[],
-    domainData:[]
+    domainData:[],
+    mapShown:false,
+    domainShown:false
 };
 
 export default function (
@@ -102,7 +105,36 @@ export default function (
                 domainData,
                 };
             }
-        
+        case Update_MapShown: {
+            if (state.mapShown) {
+                return {
+                    ...state,
+                    mapShown: !state.mapShown,
+                    mapData: [],
+                }
+            } else {
+                return {
+                    ...state,
+                    mapShown: !state.mapShown,
+                }
+            }
+
+        }
+        case Update_DomainShown: {
+            if (state.domainShown) {
+                return {
+                    ...state,
+                    domainShown: !state.domainShown,
+                    domainData: [],
+                }
+            } else {
+                return {
+                    ...state,
+                    domainShown: !state.domainShown,
+                }
+            }
+
+        }
         default:
             return state; 
     }

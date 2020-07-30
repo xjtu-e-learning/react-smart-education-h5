@@ -19,3 +19,5 @@ export const  Update_SubjectData: string = 'Update_SubjectData';
 export const SubjectData_Fetch_Required: string = 'SubjectData_Fetch_Required';
 export const  Update_DomainData: string = 'Update_DomainData';
 export const DomainData_Fetch_Required: string = 'DomainData_Fetch_Required';
+export const Update_MapShown: string = 'Update_MapShown';
+export const Update_DomainShown: string = 'Update_DomainShown';

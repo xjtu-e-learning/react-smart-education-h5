@@ -17,13 +17,13 @@ class TreeCanvas extends React.Component<any, any> {
         //console.log("Tree Canvas this.props.treeData",this.props.treeData);
         
         return (
-            <div style={{position: "relative", top: "50%", marginTop: "-50vw"}}>
+            <div id={'topic'} style={{position: "relative", top: "50%", marginTop: "-50vw"}}>
                 {
                 this.state.noInformation?(
-                    <svg id={"tree"} width={"100vw"} height={"120vw"} >
+                    <svg  id={"tree"} width={"100vw"} height={"120vw"} >
                     </svg>
                 ):(
-                    <Alert
+                    <Alert 
                     message="智慧教育系统"
                     description="你似乎来到了没有知识的荒野..."
                     type="warning"
@@ -41,7 +41,7 @@ class TreeCanvas extends React.Component<any, any> {
        var startx, starty, endx, endy;
        let direction1;
        let that = this;
-       var tree1 = document.getElementById('tree');
+       var tree1 = document.getElementById('topic');
       // var slide1 = document.getElementById('Slide');
       tree1.addEventListener("touchstart",function(e){
            var touch =e.touches[0];//第一根手指

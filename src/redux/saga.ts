@@ -1,5 +1,5 @@
 
-
+// @ts-ignore
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
     AssembleData_Fetch_Required,
@@ -12,7 +12,7 @@ import {
     Update_TreeData,
     Update_SubjectData,
     Update_DomainData,
-  
+    
 } from './actionTypes';
 import { dependenceAPI } from '../services/dependence';
 import { ActionPayload } from './actions';
