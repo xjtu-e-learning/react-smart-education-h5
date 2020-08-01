@@ -10,7 +10,7 @@ import {Select} from 'antd';
 
 class MapCanvas extends React.Component<any, any> {
     
-    render() {console.log("seq",this.props.seq);
+    render() {//console.log("seq",this.props.seq);
         return (
             
             <div style={{ position: "relative", top: "50%", marginTop: "-50vw" }}>
@@ -23,17 +23,16 @@ class MapCanvas extends React.Component<any, any> {
     }
     updateSeq=()=>{
         const svg = document.getElementById('map');
-        console.log("updateSeq",this.props);
+       // console.log("updateSeq",this.props);
         const {alertShown} = this.props;
         emptyChildren(svg);
-        console.log(this.props.mapData)
+     //   console.log(this.props.mapData)
         
         if(this.props.mapData.length!==0){
             const seq=drawCommunity(this.props.mapData, svg as HTMLElement, (d: any) => this.props.clickCom(d.id));
             if(this.props.sequences[0]===undefined&&seq[0]!==undefined){
-            console.log("!",seq.length);
+        //    console.log("!",seq.length);
             this.props.updateSequences(seq);
-          //  this.props.updatAlertShown(alertShown);
         }  
         }
     }
@@ -90,7 +89,7 @@ class MapCanvas extends React.Component<any, any> {
             //     })
             // } else 
             {
-                console.log(document.getElementById('map'));
+               // console.log(document.getElementById('map'));
                 var event = document.createEvent("HTMLEvents");
                 event.initEvent("click", true, true);
                 var svg = document.getElementById('map');
@@ -115,8 +114,8 @@ class MapCanvas extends React.Component<any, any> {
                 map.addEventListener("touchend",function(e){ //区分四个方向
                         var clientx = endx - startx;
                         var clienty = endy - starty;
-                        console.log("start,end,x位移",startx,endx,clientx);
-                        console.log("start,end,y位移",starty,endy,clienty);
+                     //   console.log("start,end,x位移",startx,endx,clientx);
+                     //   console.log("start,end,y位移",starty,endy,clienty);
                         if (Math.abs(clientx) > 4*Math.abs(clienty) && clientx > 0 && clienty>0) {
                             direction1="right"; 
                             that.props.updateMapShown();

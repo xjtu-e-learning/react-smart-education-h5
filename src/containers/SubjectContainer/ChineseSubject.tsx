@@ -13,7 +13,7 @@ class ChineseSubject extends React.Component {
   render(){
      // @ts-ignore
     const {domainData} = this.props;
-    console.log("学科页的props",this.props);
+   // console.log("学科页的props",this.props);
     const line1: string[][] = [['icon-jisuanji','计算机科学'], ['icon-huaxue-','化学'],['icon-yixue','医学'],['icon-biaozhun','示范课程'],['icon-shaonian','初中课程'],['icon-ceshi','测试']];
     const line2: string[][] = [['icon-wuli','物理'], ['icon-huabanfuben','生物学'],['icon-falv','法律'],['icon-xinli','心理学'],['icon-chengren','高中课程'],['icon-wangluo','网院']];
     const line3: string[][]= [['icon-shuxue','数学'], ['icon-tubiaozhizuomoban','地理学'],['icon-tubiao-','经济学'],['icon-xuesheng','小学课程'],['icon-ren','示范课程']];
