@@ -12,7 +12,8 @@ import {
     Update_SubjectData,
     Update_DomainData,
     Update_MapShown,
-    Update_DomainShown
+    Update_DomainShown,
+    Update_AlertShown
 } from './actionTypes';
 //@ts-ignore
 import { Action } from 'redux';
@@ -76,6 +77,9 @@ export const fetchTreeData = (topicName: string) => ({
 
 export const updateShown = () => ({
     type: Update_Shown,
+});
+export const updatAlertShown = () => ({
+    type: Update_AlertShown,
 });
 
 export const updateAssembleShown = () => ({

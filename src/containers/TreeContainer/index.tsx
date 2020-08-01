@@ -36,32 +36,38 @@ class TreeContainer extends React.Component<any, any> {
             // @ts-ignore
             <Slide direction={"right"} offset={1} shown={this.props.shown} closeFunc={this.props.updateShown}>
                <div className="about-backgroundImage" style={{ position: "absolute", top:30,width:"100%"}}>
-                    <Menu
-                        mode="horizontal"
-                        openKeys={this.state.openKeys}
-                        onOpenChange={this.onOpenChange}
-                        style={{borderStyle:"solid",textAlign:"center"}}
-                    >
-                        <SubMenu key="sub1" title="先序知识点" >
-                            {inTopic.map((topicId: any) =>
-                            <Menu.Item style={{ margin:10}} key={topicId} onClick={()=>
-                                {this.props.clickTopic(topicId);
-                                this.props.clickTopicName(gaozhongshuxue.topics[topicId]);
-                                this.props.fetchTreeData(gaozhongshuxue.topics[topicId]);
-                                this.props.updateTreeData();}}>
-                                {mapData.topics[topicId]}
-                            </Menu.Item>)}
-                        </SubMenu>
-                        <SubMenu key="sub2" title="后序知识点" >
-                        {outTopic.length==0?<Menu.Item disabled>无后序知识簇</Menu.Item>:outTopic.map((topicId: any) => <Menu.Item style={{ margin:10}} 
-                           key={topicId} onClick={()=>{this.props.clickTopic(topicId);
-                               this.props.clickTopicName(gaozhongshuxue.topics[topicId]);
-                               this.props.fetchTreeData(gaozhongshuxue.topics[topicId]);
-                               this.props.updateTreeData();}}>{mapData.topics[topicId]}
-                               </Menu.Item>)}
-                        </SubMenu>
+                 {
+                   mapData.topics===undefined?(
+                   null
+                   ):
+                   <Menu
+                    mode="horizontal"
+                    openKeys={this.state.openKeys}
+                    onOpenChange={this.onOpenChange}
+                    style={{borderStyle:"solid",textAlign:"center"}}
+                >
+                    <SubMenu key="sub1" title="先序知识点" >
+                        {inTopic.map((topicId: any) =>
+                        <Menu.Item style={{ margin:10}} key={topicId} onClick={()=>
+                            {this.props.clickTopic(topicId);
+                            this.props.clickTopicName(mapData.topics[topicId]);
+                            this.props.fetchTreeData(mapData.topics[topicId]);
+                            this.props.updateTreeData();}}>
+                            {mapData.topics[topicId]}
+                        </Menu.Item>)}
+                    </SubMenu>
+                    <SubMenu key="sub2" title="后序知识点" >
+                    {outTopic.length==0?<Menu.Item disabled>无后序知识簇</Menu.Item>:outTopic.map((topicId: any) => <Menu.Item style={{ margin:10}} 
+                       key={topicId} onClick={()=>{this.props.clickTopic(topicId);
+                           this.props.clickTopicName(mapData.topics[topicId]);
+                           this.props.fetchTreeData(mapData.topics[topicId]);
+                           this.props.updateTreeData();}}>{mapData.topics[topicId]}
+                           </Menu.Item>)}
+                    </SubMenu>
 
-                    </Menu>
+                </Menu>
+                 }
+                    
                 </div>
                 <TreeCanvas />
             </Slide>

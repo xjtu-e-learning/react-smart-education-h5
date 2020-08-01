@@ -41,7 +41,8 @@ class ChineseSubject extends React.Component {
             line2.map(item => (
               <div className={classes.courseWrapper}>
                 <IconFont type={item[0]} className={classes['icon-font']}// @ts-ignore 
-                onClick={() =>  {this.props.fetchDomainData(item[1]);this.props.updateDomainShown();this.handleclick()}}></IconFont>
+                onClick={() =>  {this.props.fetchDomainData(item[1]);this.props.updateDomainShown();
+               }}></IconFont>
                 <span id="subject" className={classes.courseTitle} // @ts-ignore
                  onClick={() =>  {this.props.fetchDomainData(item[1]);this.props.updateDomainShown();}}>{item[1]}</span>
               

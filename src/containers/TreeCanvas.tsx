@@ -41,7 +41,7 @@ class TreeCanvas extends React.Component<any, any> {
        var startx, starty, endx, endy;
        let direction1;
        let that = this;
-       var tree1 = document.getElementById('topic');
+       var tree1 = document.getElementById('tree');
       // var slide1 = document.getElementById('Slide');
       tree1.addEventListener("touchstart",function(e){
            var touch =e.touches[0];//第一根手指

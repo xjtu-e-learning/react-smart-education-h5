@@ -9,6 +9,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Tag } from "antd";
+import {Typography, Alert} from 'antd';
+import {AppstoreOutlined} from '@ant-design/icons';
 
 class AssembleContainer extends React.Component<any, any> {
     state = {
@@ -52,13 +54,19 @@ class AssembleContainer extends React.Component<any, any> {
         let labeltext = '富文本 ' ;
         let labelvideo = '视频 ' ;
 
-        
+        const Title=Typography.Title;
         return (
-            
-          <Slide direction={"bottom"} offset={1} shown={assembleShown} closeFunc={updateAssembleShown}>
           
+          <Slide direction={"bottom"} offset={1} shown={assembleShown} closeFunc={updateAssembleShown}>
+          <div  style={{ position: "absolute", top: 30,width:"100%",height:40,padding:0}}>                     
+                      <Title level={3}
+                      style={{textAlign:"center",padding:0}}
+                      >
+                      <AppstoreOutlined /> 知识列表
+                    </Title>
+          </div>
           {
-              <div id="assemble">
+              <div id="assemble" style={{ position: "absolute", top: 60,width:"100%",height:40,padding:0}}>
                   {
                       value === 0?(
                         assembleData && assembleData.map((assemble: {assembleId:number;assembleContent:string;assembleScratchTime:string;acetId:number;domainId:number;type:string;}) => (

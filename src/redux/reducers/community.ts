@@ -1,4 +1,5 @@
-import { Click_Community, Update_MapData, Update_Sequences, Update_Topic,Update_SubjectData,Update_DomainData, SubjectData_Fetch_Required,Update_MapShown,Update_DomainShown } from '../actionTypes';
+
+import { Click_Community, Update_MapData, Update_Sequences, Update_Topic,Update_SubjectData,Update_DomainData, SubjectData_Fetch_Required,Update_MapShown,Update_DomainShown, Update_AlertShown } from '../actionTypes';
 import { ActionPayload } from '../actions';
 
 export interface MapData {
@@ -14,7 +15,7 @@ export interface MapData {
     communityRelation: { [p: string]: number[] };
 }
 
-const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: number[], sequences: {[p:string]: number[]}, topicId:number,inTopic:number[],outTopic:number[],subjectData:[], domainData:[],mapShown: false,domainShown:false} = {
+const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: number[], sequences: {[p:string]: number[]}, topicId:number,inTopic:number[],outTopic:number[],subjectData:[], domainData:[],mapShown: false,domainShown:false,alertShown:true} = {
     mapData: {
         topics: {},
         resultRelations: {},
@@ -24,7 +25,6 @@ const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: 
         communityRelation: {},
         
     },
-
     comId: -1,
     inCom: [],
     outCom: [],
@@ -35,7 +35,8 @@ const initialState: { mapData: MapData; comId: number, inCom: number[], outCom: 
     subjectData:[],
     domainData:[],
     mapShown:false,
-    domainShown:false
+    domainShown:false,
+    alertShown:true,
 };
 
 export default function (
@@ -52,8 +53,10 @@ export default function (
                     tmp.push(parseInt(key));
                 }
             }
+           // console.log("state.mapData",state.mapData);
             return {
                 ...state,
+               
                 comId,
                 inCom: tmp,
                 outCom: state.mapData.communityRelation[comId] === undefined ? [] : state.mapData.communityRelation[comId],
@@ -76,11 +79,21 @@ export default function (
                 outTopic:state.mapData.resultRelations[topicId] === undefined ? [] : state.mapData.resultRelations[topicId],
             }
         }
+        case Update_AlertShown: {
+            
+                return {
+                    ...state,
+                    alertShown: !state.alertShown,
+                }
+           
+        }
         case Update_MapData: {
             const { mapData } = action.payload as { mapData: MapData };
+            
             return {
                 ...state,
                 mapData,
+                alertShown: !state.alertShown,
             };
         }
         case Update_Sequences: {
@@ -113,28 +126,36 @@ export default function (
                     mapData: [],
                 }
             } else {
+            
                 return {
                     ...state,
                     mapShown: !state.mapShown,
                 }
-            }
+            
 
-        }
+            }
+            }
         case Update_DomainShown: {
-            if (state.domainShown) {
-                return {
-                    ...state,
-                    domainShown: !state.domainShown,
-                    domainData: [],
-                }
-            } else {
-                return {
-                    ...state,
-                    domainShown: !state.domainShown,
-                }
+            return {
+                         ...state,
+                        domainShown: !state.domainShown,
             }
+            // if (state.domainShown) {
+            //     return {
+            //         ...state,
+            //         domainShown: !state.domainShown,
+            //         domainData: [],
+            //     }
+            // } else {
+            //     return {
+            //         ...state,
+            //         domainShown: !state.domainShown,
+            //     }
+            // }
 
         }
+
+        
         default:
             return state; 
     }

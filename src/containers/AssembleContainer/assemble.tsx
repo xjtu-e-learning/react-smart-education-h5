@@ -92,47 +92,47 @@ class Assemble extends React.Component<any, any> {
       </div>
     )
   }
-//   componentDidMount() {
-//     var startx, starty, endx, endy;
-//     let direction1;
-//     let that = this;
-//     var tree1 = document.getElementById('assemble');
-//    // var slide1 = document.getElementById('Slide');
-//    tree1.addEventListener("touchstart",function(e){
-//         var touch =e.touches[0];//第一根手指
-//             startx = touch.pageX;
-//             starty = touch.pageY;
-//     })
-//     tree1.addEventListener("touchmove",function(e){
-//             var touch =e.touches[0];//第一根手指
-//             endx = touch.pageX;
-//             endy = touch.pageY;
-//             //e.preventDefault();
-//     })
-//     tree1.addEventListener("touchend",function(e){ //区分四个方向
-//            // console.log(this.props);
-//             var clientx = endx - startx; 
-//             var clienty = endy - starty;
-//             if (Math.abs(clientx) > Math.abs(clienty) && clientx > 0 && clienty>0) { 
-//                 direction1="right";
-//                 if(that.props.textCount==1)
-//                 {that.props.updateAssembleShown(false);}
-//             }
-//             else if (Math.abs(clientx) > Math.abs(clienty) && clientx < -document.body.clientWidth/2) {
-//                 direction1="left";
-//             }
-//             else if (Math.abs(clientx) < Math.abs(clienty) && clienty > document.body.clientHeight/2) {
-//                 direction1="down";
-//             }
-//             else if (Math.abs(clientx) < Math.abs(clienty) && clienty < -document.body.clientHeight/2) {
-//                 direction1="up";
+  componentDidMount() {
+    var startx, starty, endx, endy;
+    let direction1;
+    let that = this;
+    var tree1 = document.getElementById('assemble');
+   // var slide1 = document.getElementById('Slide');
+   tree1.addEventListener("touchstart",function(e){
+        var touch =e.touches[0];//第一根手指
+            startx = touch.pageX;
+            starty = touch.pageY;
+    })
+    tree1.addEventListener("touchmove",function(e){
+            var touch =e.touches[0];//第一根手指
+            endx = touch.pageX;
+            endy = touch.pageY;
+            //e.preventDefault();
+    })
+    tree1.addEventListener("touchend",function(e){ //区分四个方向
+           // console.log(this.props);
+            var clientx = endx - startx; 
+            var clienty = endy - starty;
+            if (Math.abs(clientx) > Math.abs(clienty) && clientx > 0 && clienty>0) { 
+                direction1="right";
+                if(that.props.textCount==1)
+                {that.props.updateAssembleShown(false);}
+            }
+            else if (Math.abs(clientx) > Math.abs(clienty) && clientx < -document.body.clientWidth/2) {
+                direction1="left";
+            }
+            else if (Math.abs(clientx) < Math.abs(clienty) && clienty > document.body.clientHeight/2) {
+                direction1="down";
+            }
+            else if (Math.abs(clientx) < Math.abs(clienty) && clienty < -document.body.clientHeight/2) {
+                direction1="up";
                 
-//             }
-//            // console.log(direction1)
-//     })
+            }
+           // console.log(direction1)
+    })
     
      
-//  }
+ }
 }
 const mapStateToProps = (state: any) => {
   const { tree } = state;

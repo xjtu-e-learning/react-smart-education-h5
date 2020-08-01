@@ -21,3 +21,4 @@ export const  Update_DomainData: string = 'Update_DomainData';
 export const DomainData_Fetch_Required: string = 'DomainData_Fetch_Required';
 export const Update_MapShown: string = 'Update_MapShown';
 export const Update_DomainShown: string = 'Update_DomainShown';
+export const Update_AlertShown: string = 'Update_AlertShown';
