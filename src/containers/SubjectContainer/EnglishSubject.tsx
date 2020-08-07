@@ -4,7 +4,7 @@ import classes from './index.module.css';
 import { updateDomainData,fetchDomainData,updateDomainShown} from "../../redux/actions";
 import { connect } from 'react-redux';;
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1963357_igv0o6q1wca.js',
+  scriptUrl: 'https://at.alicdn.com/t/font_1963357_igv0o6q1wca.js',
 });
 
 class EnglishSubject extends React.Component {

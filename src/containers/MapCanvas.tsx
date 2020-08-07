@@ -6,12 +6,61 @@ import { drawCommunity, drawTopic } from '../module/topicDependenceVisualization
 import { connect } from "react-redux";
 import { isEqual ,isEmpty} from 'lodash';
 import { clickCom, clickTopic,clickTopicName, fetchTreeData, updateMapShown, updateMapData, updateSequences,updateShown,updatAlertShown } from "../redux/actions";
-import {Select} from 'antd';
+import {Select,Alert} from 'antd';
 
 class MapCanvas extends React.Component<any, any> {
+    myclose=()=>{
+        this.props.updateMapShown();
+        this.props.updatAlertShown(this.props.alertShown); 
+    }
+    render() {console.log("mapData",this.props.mapData);
+        if(this.props.mapData!=[])
+        {
+            if(this.props.mapData.topics!={}&&this.props.mapData.relationCrossCommunity!=undefined)
+            {
+                if(this.props.mapData.relationCrossCommunity.length==0&&this.props.alertShown==false)
+                {
+                    return (
+                
+                        <div style={{ position: "relative", top: "50%", marginTop: "-50vw" }}>
+                            
+                            
+                            <Alert 
+                                message="智慧教育系统"
+                                description="该课程下暂无数据"
+                                type="warning"
+                                showIcon
+                                closable
+                                onClose={this.myclose}
+                                />
+                            <svg id="map" width="100vw" height="100vw" onClick={this.updateSeq} >
+                            </svg>
+                        </div>
+            
+                    );
+                }else
+                {return (
+                    
+                    <div style={{ position: "relative", top: "50%", marginTop: "-50vw" }}>
+                        <svg id="map" width="100vw" height="100vw" onClick={this.updateSeq}>
+                        </svg>
+                        <p id="map"></p>
+                    </div>
+        
+                );}
+            }else
+            {return (
+                
+                <div style={{ position: "relative", top: "50%", marginTop: "-50vw" }}>
+                    <svg id="map" width="100vw" height="100vw" onClick={this.updateSeq}>
+                    </svg>
+                    <p id="map"></p>
+                </div>
     
-    render() {//console.log("seq",this.props.seq);
-        return (
+            );}
+        }
+        else
+        {return (
             
             <div style={{ position: "relative", top: "50%", marginTop: "-50vw" }}>
                 <svg id="map" width="100vw" height="100vw" onClick={this.updateSeq}>
@@ -19,19 +68,20 @@ class MapCanvas extends React.Component<any, any> {
                 <p id="map"></p>
             </div>
 
-        );
+        );}
     }
     updateSeq=()=>{
         const svg = document.getElementById('map');
        // console.log("updateSeq",this.props);
         const {alertShown} = this.props;
         emptyChildren(svg);
-     //   console.log(this.props.mapData)
+        console.log(this.props.mapData)
         
         if(this.props.mapData.length!==0){
+
             const seq=drawCommunity(this.props.mapData, svg as HTMLElement, (d: any) => this.props.clickCom(d.id));
             if(this.props.sequences[0]===undefined&&seq[0]!==undefined){
-        //    console.log("!",seq.length);
+            console.log("!",seq.length);
             this.props.updateSequences(seq);
         }  
         }

@@ -42,6 +42,9 @@ class Menumy extends React.Component {
   render() {
     const { current } = this.state;
     //let current = this.state.current;
+    
+    
+
     return (
       <div id="subject">
         
@@ -58,7 +61,7 @@ class Menumy extends React.Component {
         </div>
       </div>
     );
-    
+
   }
 
 //   componentDidMount() {  

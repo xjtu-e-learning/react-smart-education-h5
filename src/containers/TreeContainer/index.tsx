@@ -57,7 +57,7 @@ class TreeContainer extends React.Component<any, any> {
                         </Menu.Item>)}
                     </SubMenu>
                     <SubMenu key="sub2" title="后序知识点" >
-                    {outTopic.length==0?<Menu.Item disabled>无后序知识簇</Menu.Item>:outTopic.map((topicId: any) => <Menu.Item style={{ margin:10}} 
+                    {outTopic.length==0?<Menu.Item disabled>无后序知识点</Menu.Item>:outTopic.map((topicId: any) => <Menu.Item style={{ margin:10}} 
                        key={topicId} onClick={()=>{this.props.clickTopic(topicId);
                            this.props.clickTopicName(mapData.topics[topicId]);
                            this.props.fetchTreeData(mapData.topics[topicId]);

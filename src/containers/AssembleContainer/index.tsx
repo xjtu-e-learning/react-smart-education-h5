@@ -9,7 +9,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { Tag } from "antd";
-import {Typography, Alert} from 'antd';
+import {Typography} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons';
 
 class AssembleContainer extends React.Component<any, any> {
@@ -46,7 +46,7 @@ class AssembleContainer extends React.Component<any, any> {
         this.setState({ TextOrVideo: value })
       }
     render() {
-       // console.log("assemble的index页面",this.props);
+       console.log("assemble的index页面",this.props);
         const { assembleData, assembleShown, updateAssembleShown } = this.props;
         const value = this.state.TextOrVideo;
         this.textCount=0;
@@ -58,7 +58,7 @@ class AssembleContainer extends React.Component<any, any> {
         return (
           
           <Slide direction={"bottom"} offset={1} shown={assembleShown} closeFunc={updateAssembleShown}>
-          <div  style={{ position: "absolute", top: 30,width:"100%",height:40,padding:0}}>                     
+          <div  style={{ position: "relative", top: 30,width:"100%",height:40,padding:0}}>                     
                       <Title level={3}
                       style={{textAlign:"center",padding:0}}
                       >
@@ -66,15 +66,16 @@ class AssembleContainer extends React.Component<any, any> {
                     </Title>
           </div>
           {
-              <div id="assemble" style={{ position: "absolute", top: 60,width:"100%",height:40,padding:0}}>
+              <div id="assemble" style={{ position: "absolute", top: 60,width:"100%",bottom:0,overflow:"auto",padding:0}}>
                   {
-                      value === 0?(
+                    (this.props.assembleData.length!=0)?
+                      (value === 0?(
                         assembleData && assembleData.map((assemble: {assembleId:number;assembleContent:string;assembleScratchTime:string;acetId:number;domainId:number;type:string;}) => (
                             this.addText(assemble.type === 'text')? (                             
                                 <Assemble assemble={assemble} key={assemble.assembleId} textCount={this.textCount} />
                             ):
                             (
-                                null
+                              null
                             )
                         ))
                       ):
@@ -88,6 +89,9 @@ class AssembleContainer extends React.Component<any, any> {
                                null
                             )
                         ))
+                      )):(
+                        <Assemble abnormal={0} />
+                        
                       )
                   }
               </div>

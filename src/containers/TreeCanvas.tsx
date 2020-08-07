@@ -20,7 +20,7 @@ class TreeCanvas extends React.Component<any, any> {
             <div id={'topic'} style={{position: "relative", top: "50%", marginTop: "-50vw"}}>
                 {
                 this.state.noInformation?(
-                    <svg  id={"tree"} width={"100vw"} height={"120vw"} >
+                    <svg  id={"tree"} width={"100vw"} height={"90vw"} >
                     </svg>
                 ):(
                     <Alert 

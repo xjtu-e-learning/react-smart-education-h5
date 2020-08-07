@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import { updateAssembleShown} from "../../redux/actions";
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
+import {Alert} from 'antd';
 interface ILeafProps {
   assemble: {
     assembleId: number;
@@ -27,10 +28,14 @@ interface ILeafProps {
 }
 
 const StyledBadge = withStyles((theme) => ({
-  badge: {
-    right: "50%",
-    top: "50%",
-
+  anchorOriginTopRightRectangle: {
+    top: 0,
+    right: 0,
+    transform: 'scale(1) translate(150%, 50%)',
+    transformOrigin: '100% 0%',
+    '&$invisible': {
+      transform: 'scale(0) translate(50%, -50%)'
+    }
   },
 }))(Badge);
 
@@ -46,29 +51,36 @@ class Assemble extends React.Component<any, any> {
   render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
 
     const { assemble, textCount} = this.props;
-    const ordered_assembleContent=assemble.assembleContent;
+    var ordered_assembleContent
     console.log("Assemble props",this.props);
     console.log("Assemble assemble",assemble);
- 
-    return (
-
+    if(this.props.abnormal==undefined)
+    {
+      if(!(assemble.assembleContent.match("<pre")))
+      {ordered_assembleContent=assemble.assembleContent;
+      console.log("ordered_assembleContent",ordered_assembleContent)}
+      else{
+        ordered_assembleContent="<p>"+assemble.assembleText+"<p>";
+      }
+      return (
+      
       <div>
         < Grid style={{ padding: 1, marginTop: 6, overflow: 'auto', color: "00AA00" }} 
         item xs={12} key={assemble.assembleId} >
           <Paper style={{ padding: 20, border: 'solid #EEEEEE' ,position:"relative"}} >
-            <div style={{ padding: 5,width:"20%",float:"left",height:"100%",position:"absolute",top:0,bottom:0,}}>
-                <div style={{padding: 5,margin:"auto",marginTop:"50%",width:32}}>
+            <div style={{ padding: 5,width:"20%",float:"left",height:"auto",position:"absolute",top:0,bottom:0,}}>
+                
                 {textCount==1?
-                    (<StyledBadge badgeContent={textCount} color="secondary" > 
+                    (<StyledBadge  badgeContent={textCount} color="secondary" > 
                     </StyledBadge>):
                     (<StyledBadge badgeContent={textCount} color="primary" > 
                     </StyledBadge>)
                 }
-                </div>
+
                 
             </div>
             <div>
-                <div style={{ padding: 5 ,width:"80%",marginLeft:"auto"}} onClick={this.handleClick} >
+                <div style={{ padding: 5 ,height:"auto",width:"80%",marginLeft:"auto"}} onClick={this.handleClick} >
                   {
                   this.state.showDetail?
                   (
@@ -80,6 +92,7 @@ class Assemble extends React.Component<any, any> {
                     maxLine="3"
                     ellipsisHTML="<a>...查看更多</a>"
                     basedOn="letters"
+                    winWidth="100%"
                  />
                 
                   )
@@ -90,14 +103,28 @@ class Assemble extends React.Component<any, any> {
           </Paper>
         </Grid >
       </div>
-    )
+    )}
+    else{
+      console.log("abnormal")
+      return(
+        <Alert 
+        message="智慧教育系统"
+        description="这个分支没有内容..."
+        type="warning"
+        showIcon
+        closable
+        onClose={this.props.updateAssembleShown}
+        />
+      )
+    }
   }
   componentDidMount() {
     var startx, starty, endx, endy;
     let direction1;
     let that = this;
-    var tree1 = document.getElementById('assemble');
+   var tree1 = document.getElementById('assemble');
    // var slide1 = document.getElementById('Slide');
+   console.log("tree1")
    tree1.addEventListener("touchstart",function(e){
         var touch =e.touches[0];//第一根手指
             startx = touch.pageX;
@@ -115,7 +142,7 @@ class Assemble extends React.Component<any, any> {
             var clienty = endy - starty;
             if (Math.abs(clientx) > Math.abs(clienty) && clientx > 0 && clienty>0) { 
                 direction1="right";
-                if(that.props.textCount==1)
+                if(that.props.textCount==1||that.props.abnormal!=undefined)
                 {that.props.updateAssembleShown(false);}
             }
             else if (Math.abs(clientx) > Math.abs(clienty) && clientx < -document.body.clientWidth/2) {
@@ -128,7 +155,7 @@ class Assemble extends React.Component<any, any> {
                 direction1="up";
                 
             }
-           // console.log(direction1)
+            console.log(direction1)
     })
     
      

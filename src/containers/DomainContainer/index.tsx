@@ -14,6 +14,7 @@ import {Typography, Alert} from 'antd';
 import {AppstoreOutlined} from '@ant-design/icons'
 import { isEmpty } from "lodash";
 var tmp;
+
 class Card extends React.Component<any, any> {
     state = {
         noInformation: true,
@@ -26,9 +27,20 @@ class Card extends React.Component<any, any> {
         
         
         // console.log('????', this.props.fetchDomainData("计算机科学"));
+        var minId=-1;
         const Title=Typography.Title;
         const {domainShown,updateDomainShown} = this.props;
-        
+        console.log("sssss",this.props.domainData);
+        if((this.props.domainData).length!==undefined)
+        {
+            this.props.domainData.map((domain: {domainId})=>
+            {
+                if(minId==-1){minId=domain.domainId}
+                else{if(minId>domain.domainId)
+                    {minId=domain.domainId}}
+            })
+        }
+        console.log(minId);
         return (
             
             <Slide direction={"right"} offset={1} shown={domainShown} closeFunc={updateDomainShown}>
@@ -40,26 +52,16 @@ class Card extends React.Component<any, any> {
                     <AppstoreOutlined /> 课程列表
                     </Title>
                     </div>
-                   <div id="domain" style={{overflow:'auto',position:"relative",top: 30,}}>
+                   <div id="domain" style={{overflow:'auto',position:"absolute",width:"100%",top: 80, bottom:0}}>
                     {
                         ((this.props.domainData).length!==undefined)? 
                             ( ((this.props.domainData).length!==0)?
-                                   this.props.domainData.map((domain: {domainId:number;domainName:string;subjectId:number}) =>
-                                   <CardDomain domain={domain } key={domain.domainId} />):
-                                   <Alert 
-                                       message="智慧教育系统"
-                                       description="该学科下暂无课程信息"
-                                       type="warning"
-                                       showIcon
-                                       closable/>): 
-                             
-                        (
-                        <Alert 
-                        message="智慧教育系统"
-                        description="获取信息失败..."
-                        type="warning"
-                        showIcon
-                        closable/>   )
+                                   this.props.domainData.map(
+                                       (domain: {domainId:number;domainName:string;subjectId:number}) =>
+                                   <CardDomain domain={domain } key={domain.domainId} minId={minId}/>):                                   
+                                   <CardDomain abnormal="0"/>
+                                     ):                             
+                        ( <CardDomain abnormal="1"/>  )
                     }     
                     </div>
                 </div>
