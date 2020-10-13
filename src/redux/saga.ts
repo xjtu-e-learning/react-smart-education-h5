@@ -1,4 +1,5 @@
 
+
 // @ts-ignore
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
@@ -12,6 +13,7 @@ import {
     Update_TreeData,
     Update_SubjectData,
     Update_DomainData,
+   
     
 } from './actionTypes';
 import { dependenceAPI } from '../services/dependence';
@@ -46,12 +48,14 @@ function* fetchDomainData(action: ActionPayload<{ subjectName: string }>) {
 
 
 function* fetchMapData(action: ActionPayload<{ domainName: string }>) {
+   
     try {
         const mapData = yield call(
             dependenceAPI.getDependence,
             action.payload.domainName,
         );
         yield put({ type: Update_MapData, payload: { mapData } });
+       
     } catch (e) {
         yield put({ type: Update_MapData, payload: { mapData: e } });
     }

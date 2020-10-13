@@ -1,5 +1,6 @@
 import React from 'react'
 import { createFromIconfontCN } from '@ant-design/icons';
+//@ts-ignore
 import classes from './index.module.css';
 import { updateDomainData,fetchDomainData,updateDomainShown} from "../../redux/actions";
 import { connect } from 'react-redux';;
@@ -28,9 +29,11 @@ class EnglishSubject extends React.Component {
             line1.map((item) => (
               <div className={classes.courseWrapper}>
                 <IconFont type={item[0]} className={classes['icon-font']}// @ts-ignore 
-                onClick={() =>   {this.props.fetchDomainData(item[1]); this.props.updateDomainShown();}}></IconFont>
+                onClick={() =>   {this.props.fetchDomainData(item[1]); //this.props.updateDomainShown();
+                }}></IconFont>
                 <span id="subject" className={classes.courseTitle} // @ts-ignore
-                 onClick={() =>   {this.props.fetchDomainData(item[1]); this.props.updateDomainShown();}}>{item[1]}</span>
+                 onClick={() =>   {this.props.fetchDomainData(item[1]); //this.props.updateDomainShown();
+                }}>{item[1]}</span>
               </div>
               
             ))
@@ -43,9 +46,13 @@ class EnglishSubject extends React.Component {
             line2.map(item => (
               <div className={classes.courseWrapper}>
                 <IconFont type={item[0]} className={classes['icon-font']}// @ts-ignore 
-                onClick={() =>  {this.props.fetchDomainData(item[1]); this.props.updateDomainShown();}}></IconFont>
+                onClick={() =>  {this.props.fetchDomainData(item[1]); 
+                //this.props.updateDomainShown();
+              }}></IconFont>
                 <span id="subject" className={classes.courseTitle} // @ts-ignore
-                 onClick={() => {this.props.fetchDomainData(item[1]);this.props.updateDomainShown();}}>{item[1]}</span>
+                 onClick={() => {this.props.fetchDomainData(item[1]);
+                 //this.props.updateDomainShown();
+                }}>{item[1]}</span>
               </div>
             ))
           }
@@ -56,9 +63,13 @@ class EnglishSubject extends React.Component {
             line3.map(item => (
               <div className={classes.courseWrapper}>
                 <IconFont type={item[0]} className={classes['icon-font']}// @ts-ignore 
-                onClick={() =>  {this.props.fetchDomainData(item[1]);this.props.updateDomainShown(); }}></IconFont>
+                onClick={() =>  {this.props.fetchDomainData(item[1]);
+                //this.props.updateDomainShown(); 
+              }}></IconFont>
                 <span id="subject" className={classes.courseTitle} // @ts-ignore
-                 onClick={() =>   {this.props.fetchDomainData(item[1]); this.props.updateDomainShown();}}>{item[1]}</span>
+                 onClick={() =>   {this.props.fetchDomainData(item[1]);
+                 // this.props.updateDomainShown();
+                }}>{item[1]}</span>
               </div>
             ))
           }

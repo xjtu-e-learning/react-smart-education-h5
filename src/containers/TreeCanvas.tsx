@@ -5,9 +5,10 @@ import {connect} from "react-redux";
 import { drawTree } from '../module/facetTree';
 import {fetchAssembleData, updateAssembleShown,updateShown} from "../redux/actions";
 import { Alert } from 'antd';
+import { threadId } from 'worker_threads';
 
 class TreeCanvas extends React.Component<any, any> {
-    state = {
+      state = {
         noInformation: true,
       };
       change = () => {
@@ -17,23 +18,28 @@ class TreeCanvas extends React.Component<any, any> {
         //console.log("Tree Canvas this.props.treeData",this.props.treeData);
         
         return (
-            <div id={'topic'} style={{position: "relative", top: "50%", marginTop: "-50vw"}}>
-                {
-                this.state.noInformation?(
-                    <svg  id={"tree"} width={"100vw"} height={"90vw"} >
-                    </svg>
-                ):(
+
+                this.state.noInformation?( 
+                    <div id={'topic'} style={{position: "relative", top: "50%", marginTop: "-50vw"}}>
+                    <svg  id={"tree"} width={"100vw"} height={"120vw"} >
+                    </svg></div>
+                ):(<div id={'topic'} style={{position: "relative", top: "50%", marginTop: "-50vw"}}>
                     <Alert 
                     message="智慧教育系统"
                     description="你似乎来到了没有知识的荒野..."
                     type="warning"
                     showIcon
                     closable
-             />
+                    />
+                     <svg  id={"tree"} width={"100vw"} height={"120vw"} >
+                    </svg>
+                    </div>
+                    
+                    
                     
                 )
-            }
-            </div>
+            
+            
             
         );
     }
@@ -41,7 +47,7 @@ class TreeCanvas extends React.Component<any, any> {
        var startx, starty, endx, endy;
        let direction1;
        let that = this;
-       var tree1 = document.getElementById('tree');
+       var tree1 = document.getElementById('topic');
       // var slide1 = document.getElementById('Slide');
       tree1.addEventListener("touchstart",function(e){
            var touch =e.touches[0];//第一根手指
@@ -76,16 +82,20 @@ class TreeCanvas extends React.Component<any, any> {
         if (isEmpty(this.props.treeData)) return;
         const tree = document.getElementById('tree');
         emptyChildren(tree);
+        console.log("this.props.treeData.children",this.props.treeData.children)
+       
         if (isEmpty(this.props.treeData.children)) 
         {
+            
             this.change();
             console.log("没有数据");
         }
         else{
             drawTree(tree, this.props.treeData, (d:any) => {
-               // console.log("d",d);
+                
+                
                 this.props.fetchAssembleData(d);
-                this.props.updateAssembleShown();
+              
             });
         }
         

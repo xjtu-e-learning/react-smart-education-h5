@@ -10,14 +10,19 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 //@ts-ignore
 import CardDomain from "./Card";
-import {Typography, Alert} from 'antd';
-import {AppstoreOutlined} from '@ant-design/icons'
+import {Typography, Alert, Tooltip, Button} from 'antd';
+import {AppstoreOutlined, BankOutlined, UnorderedListOutlined} from '@ant-design/icons'
 import { isEmpty } from "lodash";
 var tmp;
 
 class Card extends React.Component<any, any> {
+    mycloseHome=()=>{
+       
+        this.props.updateDomainShown();
+    }
     state = {
         noInformation: true,
+       
       };
     change = () => {
         this.setState( {noInformation: false} )
@@ -31,13 +36,16 @@ class Card extends React.Component<any, any> {
         const Title=Typography.Title;
         const {domainShown,updateDomainShown} = this.props;
         console.log("sssss",this.props.domainData);
+        var i=0;
         if((this.props.domainData).length!==undefined)
         {
-            this.props.domainData.map((domain: {domainId})=>
+            this.props.domainData.map((domain: {domainId,domainName})=>
             {
                 if(minId==-1){minId=domain.domainId}
-                else{if(minId>domain.domainId)
-                    {minId=domain.domainId}}
+                else if(minId>domain.domainId){
+                    {minId=domain.domainId}
+                }
+
             })
         }
         console.log(minId);
@@ -52,18 +60,28 @@ class Card extends React.Component<any, any> {
                     <AppstoreOutlined /> 课程列表
                     </Title>
                     </div>
-                   <div id="domain" style={{overflow:'auto',position:"absolute",width:"100%",top: 80, bottom:0}}>
+                    <div className="title" style={{ position: "relative", top: 50,width:"100%",height:40,padding:0,color: 'forestgreen'}}>              
+                    &nbsp;&nbsp;  <UnorderedListOutlined />
+                    &nbsp;&nbsp;   按字母排序
+                    
+                    </div>
+                   <div id="domain" style={{overflow:'auto',position:"absolute",width:"100%",top: 120, bottom:0}}>
+                       
                     {
-                        ((this.props.domainData).length!==undefined)? 
+                        ((this.props.domainData).length!==undefined )? 
                             ( ((this.props.domainData).length!==0)?
                                    this.props.domainData.map(
-                                       (domain: {domainId:number;domainName:string;subjectId:number}) =>
-                                   <CardDomain domain={domain } key={domain.domainId} minId={minId}/>):                                   
+                                       (domain: {domainId:number;domainName:string;subjectId:number;shown:boolean}) => 
+                                        <CardDomain domain={domain} key={domain.domainId} minId={minId} name={domain.shown}/>  
+                                   ):                                   
                                    <CardDomain abnormal="0"/>
                                      ):                             
                         ( <CardDomain abnormal="1"/>  )
                     }     
                     </div>
+                    <Tooltip title="search">
+                          <Button  type="dashed"  onClick={this.mycloseHome} icon={<BankOutlined />}  style={{position:'absolute',left:0,top:30}}/>
+                    </Tooltip>
                 </div>
                
             </Slide>

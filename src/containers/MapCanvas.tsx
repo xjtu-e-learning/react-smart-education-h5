@@ -5,26 +5,31 @@ import { gaozhongshuxue } from '../module/topicDependenceVisualization';
 import { drawCommunity, drawTopic } from '../module/topicDependenceVisualization';
 import { connect } from "react-redux";
 import { isEqual ,isEmpty} from 'lodash';
-import { clickCom, clickTopic,clickTopicName, fetchTreeData, updateMapShown, updateMapData, updateSequences,updateShown,updatAlertShown } from "../redux/actions";
-import {Select,Alert} from 'antd';
+import { clickCom, clickTopic,clickTopicName, fetchTreeData, updateMapShown, updateMapData, updateSequences,updateShown,updatAlertShown,updateDomainShown } from "../redux/actions";
+import {Select,Alert, Button} from 'antd';
 
 class MapCanvas extends React.Component<any, any> {
     myclose=()=>{
         this.props.updateMapShown();
         this.props.updatAlertShown(this.props.alertShown); 
     }
+    mycloseHome=()=>{
+        this.props.updateMapShown();
+        this.props.updatAlertShown(this.props.alertShown); 
+        this.props.updateDomainShown();
+    }
     render() {console.log("mapData",this.props.mapData);
-        if(this.props.mapData!=[])
+        if(this.props.mapData!==[])
         {
-            if(this.props.mapData.topics!={}&&this.props.mapData.relationCrossCommunity!=undefined)
+            if(this.props.mapData.topics!=={}&&this.props.mapData.relationCrossCommunity!==undefined)
             {
-                if(this.props.mapData.relationCrossCommunity.length==0&&this.props.alertShown==false)
+                if(this.props.mapData.relationCrossCommunity.length===0&&this.props.alertShown===false)
                 {
                     return (
-                
-                        <div style={{ position: "relative", top: "50%", marginTop: "-50vw" }}>
-                            
-                            
+                       
+                           
+                        <div style={{ position: "relative", top: "50%", marginTop: "-50vw" }}>  
+                        
                             <Alert 
                                 message="智慧教育系统"
                                 description="该课程下暂无数据"
@@ -36,37 +41,47 @@ class MapCanvas extends React.Component<any, any> {
                             <svg id="map" width="100vw" height="100vw" onClick={this.updateSeq} >
                             </svg>
                         </div>
+                        
             
                     );
                 }else
                 {return (
                     
+
+                   
                     <div style={{ position: "relative", top: "50%", marginTop: "-50vw" }}>
+                         
                         <svg id="map" width="100vw" height="100vw" onClick={this.updateSeq}>
                         </svg>
                         <p id="map"></p>
                     </div>
-        
+                   
                 );}
             }else
             {return (
                 
+                    
                 <div style={{ position: "relative", top: "50%", marginTop: "-50vw" }}>
+                    
                     <svg id="map" width="100vw" height="100vw" onClick={this.updateSeq}>
                     </svg>
                     <p id="map"></p>
                 </div>
+               
     
             );}
         }
         else
         {return (
             
+                
             <div style={{ position: "relative", top: "50%", marginTop: "-50vw" }}>
+            
                 <svg id="map" width="100vw" height="100vw" onClick={this.updateSeq}>
                 </svg>
                 <p id="map"></p>
             </div>
+           
 
         );}
     }
@@ -169,7 +184,11 @@ class MapCanvas extends React.Component<any, any> {
                         if (Math.abs(clientx) > 4*Math.abs(clienty) && clientx > 0 && clienty>0) {
                             direction1="right"; 
                             that.props.updateMapShown();
-                            that.props.updatAlertShown(that.props.alertShown);                        
+                            if(that.props.alertShown === false)
+                            {
+                                that.props.updatAlertShown(that.props.alertShown); 
+                            }
+                                                   
                         }
                         else if (Math.abs(clientx) > Math.abs(clienty) && clientx < -document.body.clientWidth/2) {
                             direction1="left";
@@ -201,4 +220,4 @@ const mapStateToProps = (state: any) => {
     return { mapData, comId,sequences,alertShown};
 };
 
-export default connect(mapStateToProps, { updatAlertShown,clickCom,clickTopic, clickTopicName, fetchTreeData, updateMapShown, updateMapData, updateSequences,updateShown})(MapCanvas);
+export default connect(mapStateToProps, { updateDomainShown,updatAlertShown,clickCom,clickTopic, clickTopicName, fetchTreeData, updateMapShown, updateMapData, updateSequences,updateShown})(MapCanvas);

@@ -13,6 +13,7 @@ const initialState = {
     assembleShown: false,
     assembleData: [],
     domainData:[]
+
 }
 
 export default function (state = initialState, action: any) {
@@ -36,9 +37,17 @@ export default function (state = initialState, action: any) {
             }
         }
         case Update_AssembleData: {
-            return {
+           if(state.assembleShown){ 
+               return {
                 ...state,
                 assembleData: action.payload.assembleData,
+                }
+            }else{
+                return {
+                    ...state,
+                    assembleData: action.payload.assembleData,
+                    assembleShown: !state.assembleShown,
+                }
             }
         }
         case Update_AssembleShown: {
@@ -52,6 +61,7 @@ export default function (state = initialState, action: any) {
                 return {
                     ...state,
                     assembleShown: !state.assembleShown,
+                    assembleData: [],
                 }
             }
 

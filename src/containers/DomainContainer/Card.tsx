@@ -18,10 +18,15 @@ class CardDomain extends React.Component<any,any>{
     render(){
         
         const {domain} = this.props;
+        
         //console.log(this.props)
-        if(this.props.abnormal==undefined)
+        if(this.props.abnormal === undefined)
         {
-            console.log("正常",this.props.abnormal);
+            if(domain.shown === false){
+                return null;
+            }
+            else{
+                console.log("正常",this.props.abnormal);
             return (
                 <div style={{overflow:'auto'}}>
                 <Grid style={{ padding: 1, marginTop: 6, overflow: 'auto', color: "00AA00" }} item xs={12} key={domain.domainId} >
@@ -32,10 +37,11 @@ class CardDomain extends React.Component<any,any>{
                 </Paper>
                 </Grid>
                 </div>
-
-        );}
+            );
+            }
+        }
         else{
-            if(this.props.abnormal=="0")
+            if(this.props.abnormal==="0" )
             {return(
                 <Alert 
                 message="智慧教育系统"

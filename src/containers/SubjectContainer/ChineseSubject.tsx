@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react'
 import { createFromIconfontCN } from '@ant-design/icons';
+//@ts-ignore
 import classes from './index.module.css';
 import { updateDomainData,fetchDomainData,updateDomainShown } from "../../redux/actions";
 import { isEmpty } from 'lodash';
@@ -14,9 +15,10 @@ class ChineseSubject extends React.Component {
      // @ts-ignore
     const {domainData} = this.props;
    // console.log("学科页的props",this.props);
-    const line1: string[][] = [['icon-jisuanji','计算机科学'], ['icon-huaxue-','化学'],['icon-yixue','医学'],['icon-biaozhun','示范课程'],['icon-shaonian','初中课程'],['icon-ceshi','测试']];
-    const line2: string[][] = [['icon-wuli','物理'], ['icon-huabanfuben','生物学'],['icon-falv','法律'],['icon-xinli','心理学'],['icon-chengren','高中课程'],['icon-wangluo','网院']];
-    const line3: string[][]= [['icon-shuxue','数学'], ['icon-tubiaozhizuomoban','地理学'],['icon-tubiao-','经济学'],['icon-xuesheng','小学课程'],['icon-ren','人工构建']];
+    const line1: string[][] = [['icon-jisuanji','计算机科学'], ['icon-huaxue-','化学'],['icon-yixue','医学'],['icon-biaozhun','示范课程'],['icon-shaonian','初中课程']];
+    const line2: string[][] = [['icon-wuli','物理'], ['icon-huabanfuben','生物学'],['icon-falv','法律'],['icon-chengren','高中课程'],['icon-ren','人工构建']];
+    const line3: string[][]= [['icon-shuxue','数学'],['icon-ceshi','测试'],['icon-tubiao-','经济学'],['icon-xuesheng','小学课程']];
+    //const line3: string[][]= [['icon-shuxue','数学'],['icon-ceshi','测试'] ['icon-tubiaozhizuomoban','地理学'],['icon-tubiao-','经济学'],['icon-xuesheng','小学课程'],['icon-ren','人工构建']];
     return (
       
       <div className={classes.wrapper}>
@@ -26,9 +28,13 @@ class ChineseSubject extends React.Component {
               <div className={classes.courseWrapper}>
                 <IconFont type={item[0]} className={classes['icon-font']} 
                 // @ts-ignore 
-                onClick={() =>  {this.props.fetchDomainData(item[1]);this.props.updateDomainShown();}}></IconFont>
+                onClick={() =>  {this.props.fetchDomainData(item[1]);
+                //this.props.updateDomainShown();
+              }}></IconFont>
                 <span id="subject" className={classes.courseTitle} // @ts-ignore
-                 onClick={() =>  {this.props.fetchDomainData(item[1]);this.props.updateDomainShown();}}>{item[1]}</span>
+                 onClick={() =>  {this.props.fetchDomainData(item[1]);
+                 //this.props.updateDomainShown();
+                }}>{item[1]}</span>
               </div>
               
             ))
@@ -41,10 +47,13 @@ class ChineseSubject extends React.Component {
             line2.map(item => (
               <div className={classes.courseWrapper}>
                 <IconFont type={item[0]} className={classes['icon-font']}// @ts-ignore 
-                onClick={() =>  {this.props.fetchDomainData(item[1]);this.props.updateDomainShown();
+                onClick={() =>  {this.props.fetchDomainData(item[1])
+                  //;this.props.updateDomainShown();
                }}></IconFont>
                 <span id="subject" className={classes.courseTitle} // @ts-ignore
-                 onClick={() =>  {this.props.fetchDomainData(item[1]);this.props.updateDomainShown();}}>{item[1]}</span>
+                 onClick={() =>  {this.props.fetchDomainData(item[1]);
+                  //this.props.updateDomainShown();
+                }}>{item[1]}</span>
               
               </div>
             ))
@@ -56,9 +65,13 @@ class ChineseSubject extends React.Component {
             line3.map(item => (
               <div className={classes.courseWrapper}>
                 <IconFont type={item[0]} className={classes['icon-font']}// @ts-ignore 
-                onClick={() =>  {this.props.fetchDomainData(item[1]);this.props.updateDomainShown();}}></IconFont>
+                onClick={() =>  {this.props.fetchDomainData(item[1]);
+                //this.props.updateDomainShown();
+                }}></IconFont>
                 <span id="subject" className={classes.courseTitle} // @ts-ignore
-                 onClick={() =>  {this.props.fetchDomainData(item[1]);this.props.updateDomainShown();}}>{item[1]}</span>
+                 onClick={() =>  {this.props.fetchDomainData(item[1]);
+                 //this.props.updateDomainShown();
+                }}>{item[1]}</span>
               </div>
             ))
           }
